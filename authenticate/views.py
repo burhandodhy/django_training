@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
-from .forms import RegisterForm, LoginForm, ProfileForm
+from authenticate.forms import RegisterForm, LoginForm, ProfileForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
