@@ -1,9 +1,10 @@
 {% extends 'authenticate/base.html' %}
+{% load i18n %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}{% trans "Profile" %}{% endblock %}
 
 {% block content %}
-<h4 style="padding: 40px 0;">Update Profile</h4>
+<h4 style="padding: 40px 0;">{% trans "Update Profile" %}</h4>
 
 
   <table>
@@ -13,7 +14,7 @@
   
       <tr>
         <td>
-          <input type="submit" value="Update" class="btn btn-primary">
+          <input type="submit" value="{% trans 'Update' %}" class="btn btn-primary">
         </td>
       </tr>
     </form>

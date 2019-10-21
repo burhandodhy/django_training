@@ -1,9 +1,10 @@
 {% extends 'authenticate/base.html' %}
+{% load i18n %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{% trans "Login" %}{% endblock %}
 
 {% block content %}
-<h4 style="padding: 40px 0;">Login Form</h4>
+<h4 style="padding: 40px 0;">{% trans "Login Form" %}</h4>
 
 
   <table>

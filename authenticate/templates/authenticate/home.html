@@ -1,7 +1,8 @@
 {% extends 'authenticate/base.html' %}
+{% load i18n %}
 
-{% block title %}Home{% endblock %}
+{% block title %}{% trans "Home" %}{% endblock %}
 
 {% block content %}
-<p>This is Home Page</p>
+<p>{% trans "This is Home Page" %}</p>
 {% endblock %}

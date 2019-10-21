@@ -1,9 +1,9 @@
 {% extends 'authenticate/base.html' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{% trans "Register" %}{% endblock %}
 
 {% block content %}
-<h4 style="padding: 40px 0;">Registration Form</h4>
+<h4 style="padding: 40px 0;">{% trans "Registration Form" %}</h4>
 
 
 <table>
@@ -13,7 +13,7 @@
 
     <tr>
       <td>
-        <input type="submit" value="Register" class="btn btn-primary"> 
+        <input type="submit" value="{% trans 'Register' %}" class="btn btn-primary"> 
       </td>
     </tr>
   </form>
