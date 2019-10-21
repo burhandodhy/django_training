@@ -90,11 +90,9 @@ def profile(request):
       user = request.user;
 
       # Password change 
-      if password1 != '' or password2 != '':
-        #password validation
-        if password1 !=  password2:
-          messages.warning(request,'Password do not match.')
-          return HttpResponseRedirect('profile')
+      if ( password1 != '' or password2 != '' ) and ( password1 !=  password2 ):
+        messages.warning(request,'Password do not match.')
+        return HttpResponseRedirect('profile')
           
 
       if user.email != email and User.objects.filter(email=email).exists():   
