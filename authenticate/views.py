@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .forms import RegisterForm, LoginForm, ProfileForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import gettext as _
 
 def home(request):
   return render(request,'authenticate/home.html')
@@ -29,14 +30,14 @@ def register(request):
         if User.objects.filter(username=username).exists():
           messages.warning(request, 'Username already exists')
         elif User.objects.filter(email=email).exists():   
-          messages.warning(request, 'Email already exists')
+          messages.warning(request, _('Email already exists'))
         else:
           User.objects.create_user(username = username, email=email, password= password1, first_name=first_name, last_name=last_name)
-          messages.success(request, 'User Regisration Successfully. Please login.')
+          messages.success(request, _('User Regisration Successfully. Please login.'))
           return HttpResponseRedirect('login')
 
       else:
-        messages.warning(request,'Password do not match.')
+        messages.warning(request,_('Password do not match.'))
 
   else:
     form = RegisterForm()
@@ -60,10 +61,10 @@ def login(request):
 
       if user is not None:
         auth.login(request, user)
-        messages.success(request,'Login Successfully Login.')
+        messages.success(request, _('Login Successfully Login.'))
         return redirect('home')
       else:
-        messages.warning(request,'Invalid username or password.')
+        messages.warning(request, _('Invalid username or password.'))
 
   else:
     form = LoginForm()
@@ -91,12 +92,12 @@ def profile(request):
 
       # Password change 
       if ( password1 != '' or password2 != '' ) and ( password1 !=  password2 ):
-        messages.warning(request,'Password do not match.')
+        messages.warning(request, _('Password do not match.'))
         return HttpResponseRedirect('profile')
           
 
       if user.email != email and User.objects.filter(email=email).exists():   
-        messages.warning(request, 'Email already exists')
+        messages.warning(request, _('Email already exists'))
       else:
         user.first_name = first_name;
         user.last_name = last_name;
@@ -108,7 +109,7 @@ def profile(request):
           auth.update_session_auth_hash(request,user)
         
         user.save();
-        messages.success(request,'Profile Updated.')
+        messages.success(request, _('Profile Updated.'))
         return HttpResponseRedirect('profile')
 
 
@@ -125,5 +126,5 @@ def profile(request):
 def logout(request):
   if request.user.is_authenticated:
     auth.logout(request)
-    messages.success(request,'Successfully logout!')
+    messages.success(request, _('Successfully logout!'))
   return redirect('home')
