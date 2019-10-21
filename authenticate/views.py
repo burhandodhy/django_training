@@ -5,11 +5,9 @@ from .forms import RegisterForm, LoginForm, ProfileForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-# Homepage view.
 def home(request):
   return render(request,'authenticate/home.html')
 
-# Handle all register functionality.
 def register(request):
   
   if request.method == 'POST':
@@ -50,7 +48,6 @@ def register(request):
   return render(request, 'authenticate/register.html', context)
 
 
-# Handle all login functionality
 def login(request):
 
   if request.method == 'POST':
@@ -127,7 +124,6 @@ def profile(request):
   return render(request,'authenticate/profile.html', context)
 
 
-#  User logout.
 def logout(request):
   if request.user.is_authenticated:
     auth.logout(request)

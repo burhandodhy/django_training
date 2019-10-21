@@ -1,7 +1,6 @@
 from django import forms
 
 
-# Registration Form
 class RegisterForm(forms.Form):
   first_name = forms.CharField(max_length=50, required=True)
   last_name = forms.CharField(max_length=50, required=True)
@@ -11,13 +10,11 @@ class RegisterForm(forms.Form):
   password2 = forms.CharField(widget=forms.PasswordInput(), required=True)
 
 
-# Login Form
 class LoginForm(forms.Form):
   username = forms.CharField(max_length=50, required=True)
   password = forms.CharField(widget=forms.PasswordInput(), required=True)
 
 
-# Profile Form
 class ProfileForm(forms.Form):
   first_name = forms.CharField(max_length=50, required=True)
   last_name = forms.CharField(max_length=50, required=True)
