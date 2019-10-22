@@ -48,9 +48,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'authenticate.middleware.CustomAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'django_training.urls'
+
+AUTH_USER_MODEL = 'authenticate.CustomUser' 
 
 TEMPLATES = [
     {
