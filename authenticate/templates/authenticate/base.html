@@ -1,0 +1,44 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <nav class="nav">
+
+    <a class="nav-link" href="{% url 'home' %}">{% trans 'Home' %}</a>
+    {% if user.is_authenticated is not True %}
+      <a class="nav-link" href="{% url 'login' %}">{% trans 'Login' %}</a>
+      <a class="nav-link" href="{% url 'register' %}">{% trans 'Register' %}</a>
+      {% else %}
+      <a class="nav-link" href="{% url 'profile' %}">{% trans 'Profile' %}</a>
+      <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+      <a class="nav-link" href="#">{% trans 'Welcome ' %} {{ user.username }}</a>
+      
+    {% endif%}
+  </nav>
+
+  <h2>{% trans 'Authenticate App' %}</h2>
+
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}" role="alert">
+    {{message}}
+  </div>
+  {% endfor %}
+  
+  {% block content %}
+  {% endblock %}
+
+
+</body>
+
+</html>

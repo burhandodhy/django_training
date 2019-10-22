@@ -1,0 +1,23 @@
+{% extends 'authenticate/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Login" %}{% endblock %}
+
+{% block content %}
+<h4 style="padding: 40px 0;">{% trans "Login Form" %}</h4>
+
+
+  <table>
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      {{ form.as_table }}
+  
+      <tr>
+        <td>
+          <input type="submit" value="Login" class="btn btn-primary">
+        </td>
+      </tr>
+    </form>
+  </table>
+
+{% endblock %}
