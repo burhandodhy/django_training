@@ -34,7 +34,7 @@ def register(request):
         elif CustomUser.objects.filter(email=email).exists():   
           messages.warning(request, _('Email already exists'))
         else:
-          CustomUser.objects.create_user(username = username, email = email, password = password1, first_name = first_name, last_name = last_name,state = state, date_of_birth = date_of_birth,country=country)
+          CustomUser.objects.create_user(username=username, email=email, password=password1, first_name=first_name, last_name=last_name,state=state, date_of_birth=date_of_birth,country=country)
           messages.success(request, _('User Regisration Successfully. Please login.'))
           return HttpResponseRedirect('login')
 
