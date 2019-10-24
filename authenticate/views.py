@@ -1,9 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages, auth
-from django.contrib.auth.models import User
+from authenticate.models import CustomUser
 from authenticate.forms import RegisterForm, LoginForm, ProfileForm
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
 
 def home(request):
@@ -22,17 +21,20 @@ def register(request):
       email = form.cleaned_data.get('email')
       password1 = form.cleaned_data.get('password1')
       password2 = form.cleaned_data.get('password2')
+      date_of_birth = form.cleaned_data.get('date_of_birth')
+      country = form.cleaned_data.get('country')
+      state = form.cleaned_data.get('state')
       
       #password validation
       if password1 ==  password2:
 
         # check username.
-        if User.objects.filter(username=username).exists():
+        if CustomUser.objects.filter(username=username).exists():
           messages.warning(request, 'Username already exists')
-        elif User.objects.filter(email=email).exists():   
+        elif CustomUser.objects.filter(email=email).exists():   
           messages.warning(request, _('Email already exists'))
         else:
-          User.objects.create_user(username = username, email=email, password= password1, first_name=first_name, last_name=last_name)
+          CustomUser.objects.create_user(username=username, email=email, password=password1, first_name=first_name, last_name=last_name,state=state, date_of_birth=date_of_birth,country=country)
           messages.success(request, _('User Regisration Successfully. Please login.'))
           return HttpResponseRedirect('login')
 
@@ -53,19 +55,6 @@ def login(request):
 
   if request.method == 'POST':
     form = LoginForm(request.POST)
-
-    if form.is_valid():
-      username = form.cleaned_data.get('username')
-      password = form.cleaned_data.get('password')
-      user = auth.authenticate(username=username, password=password)  
-
-      if user is not None:
-        auth.login(request, user)
-        messages.success(request, _('Login Successfully Login.'))
-        return redirect('home')
-      else:
-        messages.warning(request, _('Invalid username or password.'))
-
   else:
     form = LoginForm()
 
@@ -74,8 +63,7 @@ def login(request):
   }
   return render(request, 'authenticate/login.html',context)
 
-# Only loggedin user access the profile page.
-@login_required(login_url='/login')
+
 def profile(request):
 
   if request.method == 'POST':
@@ -96,7 +84,7 @@ def profile(request):
         return HttpResponseRedirect('profile')
           
 
-      if user.email != email and User.objects.filter(email=email).exists():   
+      if user.email != email and CustomUser.objects.filter(email=email).exists():   
         messages.warning(request, _('Email already exists'))
       else:
         user.first_name = first_name;
