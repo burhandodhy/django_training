@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from app_datetime.models import DateTime
 from datetime import datetime
 import pytz
