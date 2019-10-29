@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
       
-      for i in range(options['users']):
+      for UserNo in range(options['users']):
         randomPassword = CustomUser.objects.make_random_password()
         username = get_random_string(10)
         email = username + '@gmail.com'
