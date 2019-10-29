@@ -21,12 +21,14 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(_("10 PST Date/Time converted into UTC Date/Time")))
         else:
             dateTime = DateTimeRecord.objects.filter(isUTC=True)
+            count = 0
             for obj in dateTime:
                 obj.datetime = obj.datetime.astimezone(pytz.timezone('US/Pacific')).strftime('%Y-%m-%d %H:%M:%S')
                 obj.isUTC = False
                 obj.save()
-                
-            self.stdout.write(self.style.SUCCESS( _("All UTC Time/Date converted in PST Date/Time")))
+                count += 1
+
+            self.stdout.write(self.style.SUCCESS( _("%s UTC Time/Date converted in PST Date/Time" % count)))
                 
 
         
