@@ -3,7 +3,7 @@ from authenticate.models import CustomUser
 from django.utils.crypto import get_random_string
 
 class Command(BaseCommand):
-    help = 'Create n number of Users'
+    help = 'Create Users'
 
     def add_arguments(self, parser):
         parser.add_argument('users', type=int, help='Create n number of Users')
