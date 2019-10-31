@@ -9,11 +9,11 @@ class Command(BaseCommand):
     help = 'Create 100 PST Date/Time'
 
     def handle(self, *args, **options):
-        TimeZone = pytz.timezone('US/Pacific')
-        PstTime = datetime.now(TimeZone).strftime('%Y-%m-%d %H:%M:%S')
+        timezone = pytz.timezone('US/Pacific')
+        pst_time = datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
 
         # create 100 date/time.
         for i in range(100):
-            DateTimeRecord.objects.create(datetime=PstTime, isUTC=False)
+            DateTimeRecord.objects.create(datetime=pst_time, isUTC=False)
 
         self.stdout.write(self.style.SUCCESS(_("100 PST Date/Time created.")))

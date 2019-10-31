@@ -10,10 +10,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
       
-      for UserNo in range(options['users']):
-        randomPassword = CustomUser.objects.make_random_password()
+      for user_number in range(options['users']):
+        random_password = CustomUser.objects.make_random_password()
         username = get_random_string(10)
-        email = username + '@gmail.com'
-        CustomUser.objects.create_user(username=username, email=email, password=randomPassword)
+        email = username + '@example.com'
+        CustomUser.objects.create_user(username=username, email=email, password=random_password)
 
       self.stdout.write(self.style.SUCCESS( '%s users successfully created.' % options['users'] ))
