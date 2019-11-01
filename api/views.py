@@ -14,12 +14,3 @@ class UserViewSet(viewsets.ModelViewSet):
   queryset = CustomUser.objects.all()
   permission_classes = (IsOwnerOrReadOnly,)
   http_method_names = ['get', 'patch', 'post', 'delete']
-
-  # def partial_update(self, request, *args, **kwargs):
-
-  #   # Can't update username.
-  #   if (request.user.username != request.data.get('username')):
-  #     return Response({"status_code": 405, "detail": "Username update not allowed."})
-
-  #   kwargs['partial'] = True
-  #   return self.update(request, *args, **kwargs)
