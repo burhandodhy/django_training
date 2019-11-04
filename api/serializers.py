@@ -10,10 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
       model = CustomUser
-      fields = ['id', 'username', 'email', 'password', 'first_name', 'last_name', 'state', 'country']
-      extra_kwargs = {
-          'password': {'write_only': True}
-      }
+      fields = ['id', 'username', 'email', 'first_name', 'last_name', 'state', 'country']
 
     def validate_email(self, value):
 
@@ -33,18 +30,3 @@ class UserSerializer(serializers.ModelSerializer):
         if value != self.context['request'].user.username:
           raise serializers.ValidationError("Cant update username")
       return value
-
-
-    def create(self, validated_data):
-      username = validated_data.get('username')
-      email = validated_data.get('email')
-      password = validated_data.get('password')
-      first_name = validated_data.get('first_name')
-      last_name = validated_data.get('last_name')
-      state = validated_data.get('state')
-      country = validated_data.get('country')
-
-      user = CustomUser.objects.create_user(
-          username=username, password=password, email=email, first_name=first_name, last_name=last_name, state=state, country=country )
-      return user
-
