@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'authenticate.apps.AuthenticateConfig',
     'app_datetime.apps.AppDatetimeConfig',
+    'api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [
